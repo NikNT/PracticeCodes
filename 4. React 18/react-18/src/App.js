@@ -1,5 +1,8 @@
 import "./App.css";
-import Form from "./Components/Form";
+// import PostForm from "./Components/PostForm";
+import Transition from "./Components/Transition";
+// import PostList from "./Components/PostList";
+// import Form from "./Components/Form";
 // import InLine from "./Components/InLine";
 // import NameList from "./Components/NameList";
 // import Stylesheet from "./Components/Stylesheet";
@@ -28,7 +31,10 @@ function App() {
       {/* <InLine /> */}
       {/* <h1 className="error">Error</h1>
       <h1 className={styles.success}>Success</h1> */}
-      <Form />
+      {/* <Form /> */}
+      {/* <PostList /> */}
+      {/* <PostForm /> */}
+      <Transition />
     </div>
   );
 }

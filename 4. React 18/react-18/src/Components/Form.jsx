@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 
 const Form = () => {
-  const [initialUserName, setUserName] = useState("");
+  const [initialValue, setValue] = useState("");
+  const [initialCountry, setCountry] = useState("");
+  const [initialTextArea, setTextArea] = useState("");
 
+  const handleInput = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleTextArea = (e) => {
+    setTextArea(e.target.value);
+  };
+
+  const handleCountry = (e) => {
+    setCountry(e.target.value);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Form Data is ${initialUserName}`);
+    console.log(
+      `Username is ${initialValue} : ${initialTextArea} : ${initialCountry}`
+    );
   };
   return (
     <div>
@@ -14,10 +29,26 @@ const Form = () => {
         <input
           type="text"
           name="username"
-          id="username"
-          value={initialUserName}
-          onChange={(e) => setUserName(e.target.value)}
+          value={initialValue}
+          onChange={handleInput}
         />
+        <br />
+        <label htmlFor="description">Comments: </label>
+        <textarea
+          name="description"
+          id=""
+          cols="10"
+          rows="10"
+          value={initialTextArea}
+          onChange={handleTextArea}
+        ></textarea>
+        <select name="country" id="" onChange={handleCountry}>
+          <option value="none" selected disabled hidden>
+            Select an Option
+          </option>
+          <option value="India">India</option>
+          <option value="Canada">Canada</option>
+        </select>
         <button type="submit">Submit</button>
       </form>
     </div>
