@@ -5,15 +5,18 @@ import {
   Navbar,
   Dropdown,
   Badge,
+  Button,
 } from "react-bootstrap";
 
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { CartState } from "../Context/Context";
+import { AiFillDelete } from "react-icons/ai";
 
 const Header = () => {
   const {
     state: { cart },
+    dispatch,
   } = CartState();
   return (
     <Navbar bg="dark" variant="dark" style={{ height: 80 }}>
@@ -36,7 +39,36 @@ const Header = () => {
 
           <Dropdown.Menu style={{ minWidth: 300 }}>
             {cart.length > 0 ? (
-              <span>Cart Not Empty</span>
+              <>
+                {cart.map((prod) => (
+                  <span className="cartitem" key={prod.id}>
+                    <img
+                      src={prod.image}
+                      className="cartItemImg"
+                      alt={prod.name}
+                    />
+                    <div className="cartItemDetail">
+                      <span>{prod.name}</span>
+                      <span>${prod.price.split(".")[0]}</span>
+                    </div>
+                    <AiFillDelete
+                      fontSize="20px"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        dispatch({
+                          type: "REMOVE_FROM_CART",
+                          payload: prod,
+                        });
+                      }}
+                    />
+                  </span>
+                ))}
+                <Link to="/cart">
+                  <Button style={{ width: "95%", margin: "0 10px" }}>
+                    Go to Cart
+                  </Button>
+                </Link>
+              </>
             ) : (
               <span style={{ padding: 10 }}>Cart Empty!</span>
             )}
