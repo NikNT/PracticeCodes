@@ -82,44 +82,101 @@
 
 // Extend Interfaces
 
-interface Book {
-  name: string;
-  price: number;
+// interface Book {
+//   name: string;
+//   price: number;
+// }
+
+// interface EBook extends Book {
+//   fileSize: number;
+//   format: string;
+// }
+
+// interface AudioBook extends EBook {
+//   duration: number;
+// }
+
+// const book: Book = {
+//   name: "Shoe Dog",
+//   price: 25,
+// };
+
+// const ebook: EBook = {
+//   name: "Atomic Habits",
+//   price: 25,
+//   fileSize: 300,
+//   format: "pdf",
+// };
+
+// const audioBook: AudioBook = {
+//   name: "Atomic Habits",
+//   price: 25,
+//   fileSize: 300,
+//   format: "pdf",
+//   duration: 5,
+// };
+
+// interface Book {
+//   name: string;
+//   price: number;
+// }
+
+// interface Book {
+//   size: number;
+// }
+
+// const book: Book = {
+//   name: "Atomic Habit",
+//   price: 34,
+//   size: 250,
+// };
+
+// type SanitizedStrings = string;
+// type EvenNumber = number;
+
+// Unions
+
+// type ID = number | string;
+
+//Narrowing
+
+// function printId(id: ID) {
+//   if (typeof id === "string") {
+//     console.log(id.toUpperCase());
+//   } else {
+//     console.log(id);
+//   }
+// }
+
+// printId(1);
+// printId("hello");
+
+// function getFirstThree(x: string | number[]) {
+//   return x.slice(0, 3);
+// }
+
+// console.log(getFirstThree("hello"));
+// console.log(getFirstThree([0, 1, 2, 3, 4, 5, 6]));
+
+// Generics
+
+function logString(arg: string) {
+  console.log(arg);
+  return arg;
 }
 
-interface EBook {
-  name: string;
-  price: number;
-  fileSize: number;
-  format: string;
+function logNumber(arg: number) {
+  console.log(arg);
+  return arg;
 }
 
-interface AudioBook {
-  name: string;
-  price: number;
-  fileSize: number;
-  format: string;
-  duration: number;
+function logArray(arg: any[]) {
+  console.log(arg);
+  return arg;
 }
 
-const book: Book = {
-  name: "Shoe Dog",
-  price: 25,
-};
+logString("String");
+logNumber(7);
+logArray([4, 3]);
 
-const ebook: EBook = {
-  name: "Atomic Habits",
-  price: 25,
-  fileSize: 300,
-  format: "pdf",
-};
-
-const audioBook: AudioBook = {
-  name: "Atomic Habits",
-  price: 25,
-  fileSize: 300,
-  format: "pdf",
-  duration: 5,
-};
-
-//https://youtu.be/F5pjG-sP0c8?list=PL8h-UL2G9TxDOAgqUhuTA6Op-MHafbW2S&t=4086
+// https://youtu.be/F5pjG-sP0c8?list=PL8h-UL2G9TxDOAgqUhuTA6Op-MHafbW2S&t=5820
