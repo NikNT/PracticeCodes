@@ -175,8 +175,75 @@ function logArray(arg: any[]) {
   return arg;
 }
 
+function logAnything<T>(arg: T): T {
+  console.log(arg);
+  return arg;
+}
+
 logString("String");
 logNumber(7);
 logArray([4, 3]);
+logAnything([4, 3]);
 
-// https://youtu.be/F5pjG-sP0c8?list=PL8h-UL2G9TxDOAgqUhuTA6Op-MHafbW2S&t=5820
+interface HasAge {
+  age: number;
+}
+
+interface Player {
+  name: string;
+  age: number;
+}
+
+function getOldest<T extends HasAge>(people: T[]): T {
+  return people.sort((a, b) => b.age - a.age)[0];
+}
+
+const people: HasAge[] = [{ age: 30 }, { age: 40 }, { age: 10 }];
+
+const players: Player[] = [
+  { name: "John", age: 30 },
+  { name: "Jane", age: 35 },
+  { name: "Joe", age: 16 },
+];
+
+getOldest(people);
+getOldest(players);
+
+// Assertion - Not a good approach
+
+interface IPost {
+  title: string;
+  id: number;
+  description: string;
+}
+
+interface IUser {
+  id: number;
+  name: string;
+  age: number;
+}
+
+const person = getOldest(players);
+person.name;
+
+// const fetchPostData = async (path: string): Promise<IPost[]> => {
+//   const response = await fetch(`http://example.com${path}`);
+//   return response.json();
+// };
+
+// const fetchUserData = async (path: string): Promise<IUser[]> => {
+//   const response = await fetch(`http://example.com${path}`);
+//   return response.json();
+// };
+
+const fetchData = async <ResultType>(path: string): Promise<ResultType> => {
+  const response = await fetch(`http://example.com${path}`);
+  return response.json();
+};
+
+(async () => {
+  // const posts = await fetchPostData('/posts');
+  // const users = await fetchUserData('/users');
+  const users = await fetchData<IUser[]>("/users");
+  const posts = await fetchData<IPost[]>("/users");
+})();
