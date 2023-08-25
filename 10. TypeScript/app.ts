@@ -247,3 +247,42 @@ const fetchData = async <ResultType>(path: string): Promise<ResultType> => {
   const users = await fetchData<IUser[]>("/users");
   const posts = await fetchData<IPost[]>("/users");
 })();
+
+// Duck or Structural Typing
+
+interface ICredential {
+  username: string;
+  password: string;
+  isAdmin?: boolean;
+}
+
+function login(credentials: ICredential): boolean {
+  console.log(credentials);
+  return true;
+}
+
+const user = {
+  username: "Nikhil Tanwar",
+  password: "secret",
+  isAdmin: true,
+};
+
+login(user);
+
+interface IAuth {
+  username: string;
+  password: string;
+  login(username: string, password: string): void;
+}
+
+const auth: IAuth = {
+  username: "codersgyan",
+  password: "secret",
+  login(username: string, password: string) {
+    return true;
+  },
+};
+
+// Inference - Under the hood
+
+let num = "1";
