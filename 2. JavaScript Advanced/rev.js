@@ -61,4 +61,101 @@ const currySum = curry(sum)
 console.log(currySum(2)(3)(5))
 
 // This allows to make reusable functions 
+function sayName(name){
+    console.log(`My name - ${name}`)
+}
+
+sayName('NT')
+
+// Value of this keyword can be determined by the way it is called
+
+// Implicit Binding 
+
+// When called with dot notation, this refers to the object
+
+const person = {
+    name : 'Nik', 
+    sayName: function(){
+        console.log(`My name ${this.name}`)
+    }
+}
+
+person.sayName()
+
+// Explicit Binding
+
+globalThis.name = 'GlobalName'; 
+
+function sayName(){
+    console.log(`${this.name}`)
+}
+
+sayName.call(person);
+
+// New Binding 
+
+// The new keyword internally creates a new empty object which the 'this' keyword refers to. 
+
+function Person(name){
+    // this = {}
+    this.name = name;
+}
+
+const p1 = new Person('NikTan');
+console.log(`New Binding ${p1.name}`)
+
+// Default Binding -> FallBack Binding
+
+// This keyword will be set to global scope if none of the rules are matched!
+
+sayName(); 
+
+// Order : New -> Explicit -> Implicit -> Default 
+
+// Concept of Prototype 
+
+function Per(fName, lName){
+    this.fName = fName; 
+    this.lName = lName; 
+}
+
+const per1 = new Per('John', 'Doe'); //Constructor Function
+const per2 = new Per('Bruce', 'Wayne');
+
+// JavaScript - being dynamic - allows us to bind new properties to function at any given time. 
+
+per1.getFullName = function(){
+    return `${this.fName} .. ${this.lName}`
+}
+
+console.log(per1.getFullName());
+
+// But getFullName is a generic function -> Not specific to per1 and can be extended to per2 as well. 
+// It's better to leverage prototypes here
+
+Per.prototype.getFullName = function(){
+    return `${this.fName} .. ${this.lName}`
+}
+
+console.log(per2.getFullName()); 
+
+// Prototypal Inheritance 
+
+function SuperHero(fName, lName){
+
+    Per.call(this, fName, lName)
+
+    this.isSuperHero = true;
+}
+
+SuperHero.prototype.fightCrime = function(){
+    console.log('Fights Crime');
+}
+
+SuperHero.prototype = Object.create(Person.prototype);
+
+
+const batman = new SuperHero()
+
+
 
