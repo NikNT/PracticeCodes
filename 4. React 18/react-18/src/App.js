@@ -1,40 +1,27 @@
+// import { createContext } from "react";
 import "./App.css";
-// import PostForm from "./Components/PostForm";
-import Transition from "./Components/Transition";
-// import PostList from "./Components/PostList";
-// import Form from "./Components/Form";
-// import InLine from "./Components/InLine";
-// import NameList from "./Components/NameList";
-// import Stylesheet from "./Components/Stylesheet";
-// import UserGreeting from "./Components/UserGreeting";
-// import ClickHandler from "./Components/ClickHandler";
-// import Parent from "./Components/Parent";
-// import Greet from "./Components/Greet";
-// import Message from "./Components/Message";
-// import "./Components/appStyles.css";
-// import styles from "./Components/appStyles.module.css";
+// import ComponentC from "./Components/ComponentC";
+// import Counter1 from "./Components/Counter1";
+// import CounterTwo from "./Components/CounterTwo";
+import CounterThree from "./Components/CounterThree";
+
+// export const UserContext = createContext();
+// export const ChannelContext = createContext();
 
 function App() {
   return (
+    // <div className="App">
+    //   <UserContext.Provider value={"Nikhil Tanwar"}>
+    //     <ChannelContext.Provider value={"FrontendMechanix"}>
+    //       <ComponentC />
+    //     </ChannelContext.Provider>
+    //   </UserContext.Provider>
+    // </div>
+
     <div className="App">
-      {/* <Greet myName="Manpreet" />
-      <Greet myName="Gullu" />
-      <Greet myName="Nikhil">
-        <p> Sample Children Content </p>
-      </Greet> */}
-      {/* <Message /> */}
-      {/* <ClickHandler /> */}
-      {/* <Parent /> */}
-      {/* <UserGreeting /> */}
-      {/* <NameList /> */}
-      {/* <Stylesheet /> */}
-      {/* <InLine /> */}
-      {/* <h1 className="error">Error</h1>
-      <h1 className={styles.success}>Success</h1> */}
-      {/* <Form /> */}
-      {/* <PostList /> */}
-      {/* <PostForm /> */}
-      <Transition />
+      {/* <Counter1 /> */}
+      {/* <CounterTwo /> */}
+      <CounterThree />
     </div>
   );
 }
