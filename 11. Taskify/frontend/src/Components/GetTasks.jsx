@@ -1,29 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useTasksContext } from "../Hooks/useTasksContext";
 
 const GetTasks = () => {
-  const [tasks, setTasks] = useState([]);
+  // const [tasks, setTasks] = useState([]);
+  const { tasks, dispatch } = useTasksContext();
 
   useEffect(() => {
     const fetchTasks = async () => {
-      try {
-        const response = await fetch("/api/tasks");
-        const result = await response.json();
-        setTasks(result);
-      } catch (err) {
-        console.log(err);
+      const response = await fetch("/api/tasks");
+      const result = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_TASKS",
+          payload: result,
+        });
+        console.log(result);
       }
     };
 
     fetchTasks();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
       <h3>List of Tasks</h3>
       {tasks.map((task) => (
         <p key={task._id}>
-          <p> Title : {task.title} </p>
-          <p> Description: {task.description} </p>
+          <p>
+            <strong> Title </strong> : {task.title}
+          </p>
+          {task.description && <p> Description: {task.description} </p>}
           <hr />
         </p>
       ))}
