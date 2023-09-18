@@ -60,6 +60,6 @@ export const loginUser = async (req, res) => {
 
   res.status(200).json({
     token,
-    userID: user._id,
+    userId: user._id,
   });
 };
