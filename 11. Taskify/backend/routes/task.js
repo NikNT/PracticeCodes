@@ -1,10 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { getTasks, postTasks } = require("../controllers/taskController");
+const {
+  getTasks,
+  postTasks,
+  deleteTask,
+} = require("../controllers/taskController");
 
-// GET all workouts
+// GET all Tasks
 router.get("/", getTasks);
-// POST workout
+// POST Tasks
 router.post("/", postTasks);
+// DELETE Tasks
+router.delete("/:id", deleteTask);
 
 module.exports = router;

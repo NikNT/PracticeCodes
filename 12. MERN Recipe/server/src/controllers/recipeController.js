@@ -21,9 +21,9 @@ export const postRecipe = async (req, res) => {
 };
 
 export const saveRecipe = async (req, res) => {
+  const recipe = await RecipeModel.findById(req.body.recipeId);
+  const user = await UserModel.findById(req.body.usedId);
   try {
-    const recipe = await RecipeModel.findById(req.body.recipeId);
-    const user = await UserModel.findById(req.body.usedId);
     user.savedRecipes.push(recipe);
     await user.save();
     res.json({

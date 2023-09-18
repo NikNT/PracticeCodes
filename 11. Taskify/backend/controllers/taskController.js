@@ -1,5 +1,6 @@
 // GET Tasks
 
+const mongoose = require("mongoose");
 const Tasks = require("../models/taskModel");
 
 const getTasks = async (req, res) => {
@@ -27,7 +28,29 @@ const postTasks = async (req, res) => {
   }
 };
 
+const deleteTask = async (req, res) => {
+  const { id } = req.params;
+
+  //Check whether ID is valid or not
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({
+      error: "Invalid Workout ID",
+    });
+  }
+
+  const task = await Tasks.findOneAndDelete({ _id: id });
+
+  if (!task) {
+    return res.status(404).json({
+      error: "No such task",
+    });
+  }
+
+  res.status(200).json(task);
+};
+
 module.exports = {
   getTasks,
   postTasks,
+  deleteTask,
 };

@@ -22,6 +22,27 @@ const GetTasks = () => {
     fetchTasks();
   }, [dispatch]);
 
+  const handleDelete = async (taskId) => {
+    const response = await fetch("/api/tasks/" + taskId, {
+      method: "DELETE",
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      dispatch({
+        type: "DELETE_TASK",
+        payload: json,
+      });
+    }
+
+    console.log("Deleted Task", json);
+  };
+
+  const handleUpdate = async (taskId) => {
+    console.log(taskId);
+  };
+
   return (
     <>
       <h3>List of Tasks</h3>
@@ -31,6 +52,8 @@ const GetTasks = () => {
             <strong> Title </strong> : {task.title}
           </p>
           {task.description && <p> Description: {task.description} </p>}
+          <button onClick={() => handleUpdate(task._id)}>Update ✅</button>
+          <button onClick={() => handleDelete(task._id)}>Delete 🗑️</button>
           <hr />
         </p>
       ))}
