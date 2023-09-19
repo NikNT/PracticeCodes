@@ -49,8 +49,25 @@ const deleteTask = async (req, res) => {
   res.status(200).json(task);
 };
 
+const updateTasks = async (req, res) => {
+  const { id } = req.params;
+
+  console.log("ID and Body :", req.params.id, req.body);
+
+  const task = await Tasks.findOneAndUpdate(
+    {
+      _id: id,
+    },
+    { ...req.body },
+    { new: true }
+  );
+
+  res.status(200).json(task);
+};
+
 module.exports = {
   getTasks,
   postTasks,
   deleteTask,
+  updateTasks,
 };

@@ -53,7 +53,7 @@ const PostTasks = () => {
       />
 
       <label>
-        <strong> Description: </strong>{" "}
+        <strong> Description: </strong>
       </label>
       <input
         type="text"
