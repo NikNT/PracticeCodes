@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTasksContext } from "../Hooks/useTasksContext";
+import "./PostTasks.css";
 
 const PostTasks = () => {
   const { dispatch } = useTasksContext();
@@ -14,6 +15,10 @@ const PostTasks = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(`Title : ${title} | Description : ${description}`);
+
+    if (task.title === "") {
+      return alert("Title Required");
+    }
 
     const response = await fetch("/api/tasks", {
       method: "POST",
@@ -41,27 +46,31 @@ const PostTasks = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form-container" onSubmit={handleSubmit}>
       <h3>Add a New Task</h3>
-      <label>
-        <strong> Title: </strong>
-      </label>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <div className="form-group">
+        <label htmlFor="title">
+          <strong>Title:</strong>
+        </label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
 
-      <label>
-        <strong> Description: </strong>
-      </label>
-      <input
-        type="text"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
+      <div className="form-group">
+        <label htmlFor="description">
+          <strong>Description:</strong>
+        </label>
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
 
-      <button>Add Task</button>
+      <button type="submit">Add Task</button>
     </form>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTasksContext } from "../Hooks/useTasksContext";
+import "./GetTasks.css";
 
 const GetTasks = () => {
   const { tasks, dispatch } = useTasksContext();
@@ -56,13 +57,26 @@ const GetTasks = () => {
   };
 
   const updateContent = async (taskId) => {
+    if ((updatedTaskData.title || updatedTaskData.description) === "") {
+      return alert("Fill in the required fields");
+    }
+
     try {
+      const updatedData = {};
+
+      if (updatedTaskData.title !== "") {
+        updatedData.title = updatedTaskData.title;
+      }
+
+      if (updatedTaskData.description !== "") {
+        updatedData.description = updatedTaskData.description;
+      }
       const response = await fetch("/api/tasks/" + taskId, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedTaskData),
+        body: JSON.stringify(updatedData),
       });
       const json = await response.json();
       if (response.ok) {
@@ -83,63 +97,62 @@ const GetTasks = () => {
 
   return (
     <>
-      <h3>List of Tasks</h3>
-      {tasks.map((task) => (
-        <p key={task._id}>
-          <p>
-            <strong> Title </strong> : {task.title}
-          </p>
-          {task.description && (
+      <h1 className="tasks-heading">Task List</h1>
+      <div className="task-list">
+        {tasks.map((task) => (
+          <div key={task._id} className="task-card">
             <p>
-              {" "}
-              <strong> Description: </strong>
-              {task.description}{" "}
+              <strong> Title: </strong> {task.title}
             </p>
-          )}
-          <button onClick={() => handleEdit(task._id)}>Edit ✅</button>
-          <button onClick={() => handleDelete(task._id)}>Delete 🗑️</button>
-          <br />
-          {showModal && selectedTask === task._id && (
-            <div>
-              <label htmlFor="updatedtitle">Update Task: </label>
-              <input
-                type="text"
-                name="updatedtitle"
-                onChange={(e) =>
-                  setUpdatedTaskData({
-                    ...updatedTaskData,
-                    title: e.target.value,
-                  })
-                }
-                value={updatedTaskData.title}
-              />
-
-              {task.description && (
-                <>
-                  <label htmlFor="updateddescription">
-                    Update Description:{" "}
-                  </label>
-                  <input
-                    type="text"
-                    name="updateddescription"
-                    onChange={(e) =>
-                      setUpdatedTaskData({
-                        ...updatedTaskData,
-                        description: e.target.value,
-                      })
-                    }
-                    value={updatedTaskData.description}
-                  />
-                </>
-              )}
-
-              <button onClick={() => updateContent(task._id)}>Update </button>
-              <button onClick={() => hideModal(task._id)}>Cancel ❌</button>
+            {task.description && (
+              <p>
+                <strong> Description: </strong> {task.description}
+              </p>
+            )}
+            <div className="button-container">
+              <button onClick={() => handleEdit(task._id)}>Edit ✍🏽</button>
+              <button onClick={() => handleDelete(task._id)}>Delete ❌</button>
             </div>
-          )}
-          <hr />
-        </p>
-      ))}
+            <br />
+            {showModal && selectedTask === task._id && (
+              <div className="modal">
+                <label htmlFor="updatedtitle">Update Task: </label>
+                <input
+                  type="text"
+                  name="updatedtitle"
+                  onChange={(e) =>
+                    setUpdatedTaskData({
+                      ...updatedTaskData,
+                      title: e.target.value,
+                    })
+                  }
+                  value={updatedTaskData.title}
+                />
+                <label htmlFor="updateddescription">
+                  {task.description ? "Update" : "Add"} Description:
+                </label>
+                <input
+                  type="text"
+                  name="updateddescription"
+                  onChange={(e) =>
+                    setUpdatedTaskData({
+                      ...updatedTaskData,
+                      description: e.target.value,
+                    })
+                  }
+                  value={updatedTaskData.description}
+                />
+                <div className="button-container">
+                  <button onClick={() => updateContent(task._id)}>
+                    Update{" "}
+                  </button>
+                  <button onClick={() => hideModal(task._id)}>Cancel ❌</button>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </>
   );
 };
