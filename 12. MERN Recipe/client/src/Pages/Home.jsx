@@ -3,6 +3,7 @@ import axios from "axios";
 import { useGetUserId } from "../hooks/useGetUserId";
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
+  const [savedRecipes, setSavedRecipes] = useState([]);
   const userId = useGetUserId();
 
   useEffect(() => {
@@ -17,7 +18,21 @@ const Home = () => {
       }
     };
 
+    const fetchSavedRecipes = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/recipes/savedRecipes/ids",
+          { userId }
+        );
+        // setSavedRecipes(response.data);
+        console.log(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     fetchRecipes();
+    fetchSavedRecipes();
   }, []);
 
   const saveRecipe = async (recipeId) => {

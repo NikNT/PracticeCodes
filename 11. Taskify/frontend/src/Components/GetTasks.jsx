@@ -10,11 +10,17 @@ const GetTasks = () => {
     title: "",
     description: "",
   });
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     const fetchTasks = async () => {
       const response = await fetch("/api/tasks");
       const result = await response.json();
+      console.log("Length of JSON", result.length);
+      setTotalPages(Math.ceil(result.length / itemsPerPage));
+      console.log("Total Pages", totalPages);
 
       if (response.ok) {
         dispatch({
