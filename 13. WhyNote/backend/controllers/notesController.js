@@ -1,15 +1,25 @@
+const Note = require("../model/notesModel");
+
 const getNotes = async (req, res) => {
-  res.status(200).json({
-    message: "Get All Task",
-  });
+  try {
+    const notes = await Note.find({}).sort({ createdAt: -1 });
+    res.status(200).json(notes);
+  } catch (err) {
+    console.error("Error fetching notes: ", err);
+  }
 };
 
 const postNote = async (req, res) => {
   const { title, description } = req.body;
-  res.status(200).json({
-    title,
-    description,
-  });
+  try {
+    const note = await Note.create({
+      title,
+      description,
+    });
+    res.status(200).json(note);
+  } catch (err) {
+    console.log("Error posting note: ", err);
+  }
 };
 
 module.exports = { getNotes, postNote };
