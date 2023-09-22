@@ -1,31 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { NoteContext } from "../global/Context";
 
 const PostNote = () => {
+  const { dispatch } = useContext(NoteContext);
   const [note, setNote] = useState({
     title: "",
     description: "",
   });
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     const data = {
       title: note.title,
       description: note.description,
     };
-    e.preventDefault();
-    const response = await fetch("http://localhost:3001/api/notes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch("http://localhost:3001/api/notes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    console.log(response.data);
+      const json = await response.json();
+
+      if (response.ok) {
+        setNote({ title: "", description: "" });
+        dispatch({
+          type: "POST_NOTE",
+          payload: json,
+        });
+      }
+    } catch (err) {
+      console.error("Error fetching notes: ", err);
+    }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <h3>Add a Note</h3>
         <label htmlFor="title">Title: </label>
         <input
           type="text"

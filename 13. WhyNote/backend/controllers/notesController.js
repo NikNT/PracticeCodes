@@ -22,4 +22,14 @@ const postNote = async (req, res) => {
   }
 };
 
-module.exports = { getNotes, postNote };
+const deleteNote = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const note = await Note.findOneAndDelete({ _id: id });
+    res.status(200).json(note);
+  } catch (err) {
+    console.error("Error deleting note: ", err);
+  }
+};
+
+module.exports = { getNotes, postNote, deleteNote };
