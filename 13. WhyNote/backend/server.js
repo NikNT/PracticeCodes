@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const notesRoutes = require("./routes/notesRoutes");
+const cors = require("cors");
 require("dotenv").config();
 const PORT = process.env.PORT;
 const mongoURI = process.env.MONGO_URI;
 
+app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
