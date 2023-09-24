@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NoteContext } from "../global/Context";
 
-const DeleteNote = ({ noteId }) => {
+const DeleteNote = ({ noteId, icon }) => {
   const { dispatch } = useContext(NoteContext);
   const handleDelete = async (noteId) => {
     try {
@@ -25,7 +25,16 @@ const DeleteNote = ({ noteId }) => {
       console.error("Error in Deleting Note: ", err);
     }
   };
-  return <button onClick={() => handleDelete(noteId)}>❌</button>;
+  return (
+    <img
+      src={icon}
+      alt="Delete Icon"
+      onClick={() => handleDelete(noteId)}
+      style={{
+        cursor: "pointer",
+      }}
+    />
+  );
 };
 
 export default DeleteNote;

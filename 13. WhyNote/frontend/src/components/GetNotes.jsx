@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { NoteContext } from "../global/Context";
-import DeleteNote from "./DeleteNote";
+import NoteCard from "./NoteCard";
 
 const Home = () => {
   const { notes, dispatch } = useContext(NoteContext);
@@ -26,14 +26,7 @@ const Home = () => {
   }, [dispatch]);
   return (
     <>
-      <h2>NotesList</h2>
-      {notes &&
-        notes.map((note) => (
-          <li key={note._id}>
-            {note.title} | {note.description}
-            <DeleteNote noteId={note._id} />
-          </li>
-        ))}
+      <NoteCard notes={notes} />
     </>
   );
 };

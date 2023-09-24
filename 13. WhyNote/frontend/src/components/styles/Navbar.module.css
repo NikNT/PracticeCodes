@@ -1,0 +1,36 @@
+.nav {
+  height: 80px;
+  width: 100%;
+
+  color: #fff5e0;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  background: #c70039;
+}
+
+.nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  list-style-type: none;
+}
+
+.nav ul li {
+  margin-top: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff5e0;
+}
+
+.nav_heading {
+  color: #fff5e0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

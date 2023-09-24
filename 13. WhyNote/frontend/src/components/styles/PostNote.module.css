@@ -1,0 +1,88 @@
+.form {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  height: 350px;
+}
+
+.noteModal {
+  /* background-color: #fff; */
+  /* background: none; */
+  width: 52%;
+  height: 530px;
+  border-radius: 10px;
+  /* box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06); */
+}
+
+.noteModalContainer {
+  height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin-top: 10px;
+  border: none;
+}
+
+.noteModal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.input {
+  width: 35vw;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+.input:focus,
+.description:focus {
+  outline: none;
+}
+
+.description::placeholder,
+.input::placeholder {
+  position: absolute;
+  top: 0;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.description {
+  height: 380px;
+  width: 35vw;
+  border: none;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}
+
+.button button {
+  width: 80px;
+  height: 30px;
+  border-radius: 8px;
+  margin-left: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.postButton {
+  background-color: #c70039;
+  color: #fff5e0;
+}
+
+.postButton:disabled {
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background: none;
+  color: #c70039;
+}
