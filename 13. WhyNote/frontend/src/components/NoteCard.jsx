@@ -4,6 +4,7 @@ import styles from "./styles/NoteCard.module.css";
 import PostNote from "./PostNote";
 import deleteIcon from "../assets/delete.svg";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import ReadMore from "./ReadMore";
 // import { motion, AnimatePresence } from "framer-motion";
 
 const NoteCard = ({ notes }) => {
@@ -22,7 +23,10 @@ const NoteCard = ({ notes }) => {
                   : note.description}
               </p>
               {note.description.length > 300 && (
-                <button className={styles.readMore}>Read More</button>
+                <ReadMore
+                  noteTitle={note.title}
+                  noteDescription={note.description}
+                />
               )}
               <hr />
               <div className={styles.dateAndDelete}>
