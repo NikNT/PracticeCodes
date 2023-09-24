@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { NoteContext } from "../global/Context";
 import styles from "./styles/PostNote.module.css";
 import add from "../assets/add.svg";
-import close from "../assets/close.svg";
+// import close from "../assets/close.svg";
 
 const PostNote = () => {
   const { dispatch } = useContext(NoteContext);
@@ -45,11 +45,6 @@ const PostNote = () => {
   return (
     <>
       {modal ? (
-        <div className={styles.form} onClick={() => setModal(!modal)}>
-          <img src={add} alt="Add Icon" />
-          <p>Add Note</p>
-        </div>
-      ) : (
         <div className={styles.noteModalContainer}>
           <form onSubmit={handleSubmit} className={styles.noteModal}>
             <div>
@@ -58,7 +53,7 @@ const PostNote = () => {
                 name="title"
                 value={note.title}
                 onChange={(e) => setNote({ ...note, title: e.target.value })}
-                placeholder="Title"
+                placeholder="Title | Required"
                 className={styles.input}
               />
             </div>
@@ -70,7 +65,7 @@ const PostNote = () => {
                 onChange={(e) =>
                   setNote({ ...note, description: e.target.value })
                 }
-                placeholder="Description"
+                placeholder="Description | Optional"
                 className={styles.description}
               />
             </div>
@@ -91,6 +86,14 @@ const PostNote = () => {
               </button>
             </div>
           </form>
+        </div>
+      ) : (
+        <div
+          className={`${styles.form} ${styles.addNote}`}
+          onClick={() => setModal(!modal)}
+        >
+          <img src={add} alt="Add Icon" />
+          <p>Add Note</p>
         </div>
       )}
     </>

@@ -9,20 +9,38 @@
   height: 350px;
 }
 
+.addNote {
+  margin: 0 auto;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.addNote img {
+  height: 40px;
+  fill: #c70039;
+}
+
+.addNote p {
+  color: #c70039;
+  font-weight: bold;
+  font-size: 22px;
+}
+
 .noteModal {
-  /* background-color: #fff; */
-  /* background: none; */
   width: 52%;
-  height: 530px;
+  /* height: 530px; */
   border-radius: 10px;
-  /* box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06); */
 }
 
 .noteModalContainer {
   height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   margin-top: 10px;
   border: none;
 }
