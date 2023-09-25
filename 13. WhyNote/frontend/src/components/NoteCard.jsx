@@ -4,18 +4,48 @@ import styles from "./styles/NoteCard.module.css";
 import PostNote from "./PostNote";
 import deleteIcon from "../assets/delete.svg";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
-import ReadMore from "./ReadMore";
-// import { motion, AnimatePresence } from "framer-motion";
+
+const ExpandedNote = ({ note, onClose }) => {
+  return (
+    <div className={styles.openedNote}>
+      <h3 className={styles.title}>{note.title}</h3>
+      <p className={styles.description}>{note.description}</p>
+      <button onClick={onClose} className={styles.readMore}>
+        Close
+      </button>
+    </div>
+  );
+};
 
 const NoteCard = ({ notes }) => {
-  // const [selectedId, setSelectedId] = useState(null);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [isExpandedNoteOpen, setIsExpandedNoteOpen] = useState(false);
+
+  const handleReadMoreClick = (note) => {
+    setSelectedNote(note);
+    setIsExpandedNoteOpen(true);
+  };
+
+  const handleCloseClick = () => {
+    setSelectedNote(null);
+    setIsExpandedNoteOpen(false);
+  };
+
   return (
     <>
       <PostNote />
       <div className={styles.notes}>
+        {selectedNote && (
+          <ExpandedNote note={selectedNote} onClose={handleCloseClick} />
+        )}
         {notes &&
           notes.map((note) => (
-            <div className={styles.card} key={note._id}>
+            <div
+              className={`${styles.card} ${
+                isExpandedNoteOpen ? styles.blurredBackground : ""
+              }  `}
+              key={note._id}
+            >
               <h3 className={styles.title}>{note.title}</h3>
               <p className={styles.description}>
                 {note.description.length > 150
@@ -23,10 +53,12 @@ const NoteCard = ({ notes }) => {
                   : note.description}
               </p>
               {note.description.length > 300 && (
-                <ReadMore
-                  noteTitle={note.title}
-                  noteDescription={note.description}
-                />
+                <button
+                  className={styles.readMore}
+                  onClick={() => handleReadMoreClick(note)}
+                >
+                  Read More
+                </button>
               )}
               <hr />
               <div className={styles.dateAndDelete}>
