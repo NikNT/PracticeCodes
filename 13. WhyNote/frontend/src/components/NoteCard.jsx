@@ -19,33 +19,25 @@ const ExpandedNote = ({ note, onClose }) => {
 
 const NoteCard = ({ notes }) => {
   const [selectedNote, setSelectedNote] = useState(null);
-  const [isExpandedNoteOpen, setIsExpandedNoteOpen] = useState(false);
 
   const handleReadMoreClick = (note) => {
     setSelectedNote(note);
-    setIsExpandedNoteOpen(true);
   };
 
   const handleCloseClick = () => {
     setSelectedNote(null);
-    setIsExpandedNoteOpen(false);
   };
 
   return (
     <>
       <PostNote />
+      {selectedNote && (
+        <ExpandedNote note={selectedNote} onClose={handleCloseClick} />
+      )}
       <div className={styles.notes}>
-        {selectedNote && (
-          <ExpandedNote note={selectedNote} onClose={handleCloseClick} />
-        )}
         {notes &&
           notes.map((note) => (
-            <div
-              className={`${styles.card} ${
-                isExpandedNoteOpen ? styles.blurredBackground : ""
-              }  `}
-              key={note._id}
-            >
+            <div className={styles.card} key={note._id}>
               <h3 className={styles.title}>{note.title}</h3>
               <p className={styles.description}>
                 {note.description.length > 150

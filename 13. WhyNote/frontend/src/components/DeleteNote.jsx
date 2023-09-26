@@ -1,8 +1,21 @@
 import React, { useContext } from "react";
 import { NoteContext } from "../global/Context";
+import { ToastContainer, toast } from "react-toastify";
 
 const DeleteNote = ({ noteId, icon }) => {
   const { dispatch } = useContext(NoteContext);
+  const notification = () => {
+    toast.success("Deleted Successfully!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
   const handleDelete = async (noteId) => {
     try {
       const response = await fetch(
@@ -21,6 +34,7 @@ const DeleteNote = ({ noteId, icon }) => {
         });
       }
       console.log("Deleted: ", json);
+      notification();
     } catch (err) {
       console.error("Error in Deleting Note: ", err);
     }

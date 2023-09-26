@@ -4,6 +4,8 @@ import App from "./App";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { NoteContextProvider } from "./global/Context";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -11,6 +13,7 @@ root.render(
     <BrowserRouter>
       <NoteContextProvider>
         <App />
+        <ToastContainer />
       </NoteContextProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -3,6 +3,7 @@ import { NoteContext } from "../global/Context";
 import styles from "./styles/PostNote.module.css";
 import add from "../assets/add.svg";
 // import close from "../assets/close.svg";
+import { toast } from "react-toastify";
 
 const PostNote = () => {
   const { dispatch } = useContext(NoteContext);
@@ -11,6 +12,18 @@ const PostNote = () => {
     description: "",
   });
   const [modal, setModal] = useState(false);
+  const notification = () => {
+    toast.success("Note Added!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,6 +49,7 @@ const PostNote = () => {
           payload: json,
         });
         setModal(!modal);
+        notification();
       }
     } catch (err) {
       console.error("Error fetching notes: ", err);
