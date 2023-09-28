@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { NoteContext } from "../global/Context";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const DeleteNote = ({ noteId, icon }) => {
   const { dispatch } = useContext(NoteContext);

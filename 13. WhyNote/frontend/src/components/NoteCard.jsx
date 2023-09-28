@@ -7,12 +7,12 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const ExpandedNote = ({ note, onClose }) => {
   return (
-    <div className={styles.openedNote}>
-      <h3 className={styles.title}>{note.title}</h3>
-      <p className={styles.description}>{note.description}</p>
-      <button onClick={onClose} className={styles.readMore}>
-        Close
-      </button>
+    <div className={styles.container}>
+      <div className={styles.openedNote}>
+        <h3 className={styles.title}>{note.title}</h3>
+        <p className={styles.description}>{note.description}</p>
+        <button onClick={onClose}>Close</button>
+      </div>
     </div>
   );
 };
