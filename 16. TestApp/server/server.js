@@ -6,9 +6,16 @@ import mongoose from "mongoose";
 
 //NODE -> Framework -> Express
 
+// npm install express
+// cors
+// bodyParser
+// mongoose - BE and DB ke beech me
+// dotenv
+// nodemon
+
 const app = express();
 //middleware
-app.use(bodyParser.json());
+app.use(bodyParser.json()); //parse
 configDotenv();
 
 app.use((req, res, next) => {
@@ -17,6 +24,8 @@ app.use((req, res, next) => {
 });
 
 // FORM
+
+// POSTMAN -> API Testing
 
 // CRUD
 app.use("/api/tasks", router);

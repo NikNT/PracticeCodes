@@ -1,13 +1,14 @@
 import model from "../models/taskModel.js";
 
 export const getAllTasks = async (req, res) => {
-  const getTasks = await model.find({}).sort({ createdAt: -1 });
+  const getTasks = await model.find({}).sort({ createdAt: -1 }).limit(2); //Mongo
   res.status(200).json(getTasks);
 };
 
 export const postTask = async (req, res) => {
   const { title, description } = req.body;
 
+  // INSERT title, description into TABLE;
   const data = await model.create({
     title,
     description,
